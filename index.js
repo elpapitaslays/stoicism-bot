@@ -29,8 +29,8 @@ for (const folder of commandFolder) {
 		if ('data' in command && 'execute' in command) {
 			// guardar comando en la colección para usar después
 			client.commands.set(command.data.name, command);
-			// preparar comandos para registro en Discord API
-			commands.push(command.data.toJSON());
+            //preparar los comandos para la API de Discord
+            commands.push(command.data.toJSON());
 		} else {
 			console.log(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`);
 		}
