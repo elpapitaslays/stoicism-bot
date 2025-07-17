@@ -15,7 +15,7 @@ const client = new Client({
 // array para registrar comandos
 const commands = [];
 
-// crear la colección de comandos
+// crear colección de comandos
 client.commands = new Collection();
 
 // obtener todos los comandos de cada carpeta dentro de slash_commands
