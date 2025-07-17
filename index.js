@@ -19,19 +19,19 @@ const commands = [];
 client.commands = new Collection();
 
 // obtener todos los comandos de cada carpeta dentro de slash_commands
-for (const folder of commandFolder) {
+for (const folder of commandFolder){
 	const commandsPath = path.join(foldersPath, folder);
 	const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
 
-	for (const file of commandFiles) {
+	for(const file of commandFiles){
 		const filePath = path.join(commandsPath, file);
 		const command = require(filePath);
-		if ('data' in command && 'execute' in command) {
+		if('data' in command && 'execute' in command){
 			// guardar comando en la colección para usar después
 			client.commands.set(command.data.name, command);
             // preparar los comandos para la API de Discord
             commands.push(command.data.toJSON());
-		} else {
+		} else{
 			console.log(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`);
 		}
 	}
