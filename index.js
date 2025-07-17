@@ -1,5 +1,5 @@
 // inicializando variables
-const { Client, Events, GatewayIntentBits, Collection, InteractionResponseFlags } = require("discord.js");
+const { Client, Events, GatewayIntentBits, Collection } = require("discord.js");
 const { token, clientId, guildId } = require("./config.json");
 const fs = require("node:fs");
 const path = require("path");
@@ -29,7 +29,7 @@ for (const folder of commandFolder) {
 		if ('data' in command && 'execute' in command) {
 			// guardar comando en la colección para usar después
 			client.commands.set(command.data.name, command);
-            //preparar los comandos para la API de Discord
+            // preparar los comandos para la API de Discord
             commands.push(command.data.toJSON());
 		} else {
 			console.log(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`);
@@ -59,7 +59,7 @@ const rest = new REST().setToken(token);
 // event listener para manejar las interacciones (comandos)
 client.on(Events.InteractionCreate, async interaction => {
     if(!interaction.isChatInputCommand()) return;
-    
+
     const command = interaction.client.commands.get(interaction.commandName);
 
     // si no encontramos el comando tiramos error
