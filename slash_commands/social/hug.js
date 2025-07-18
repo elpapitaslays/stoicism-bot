@@ -13,6 +13,7 @@ module.exports = {
     ),
 
     async execute(interaction){
+        // no toquen esta función por dios
         async function getImage(){
             const query = "hug";
             
@@ -35,6 +36,7 @@ module.exports = {
         const huggedUser = options.getUser("usuario");
         const image = await getImage();
 
+        // el embed tampoco
         const embed = new EmbedBuilder()
         .setTitle("ABRAZO")
         .setDescription(`### ${interaction.user} ha abrazado a ${huggedUser}`)
@@ -43,6 +45,7 @@ module.exports = {
         .setTimestamp()
         .setImage(image);
 
+        // si quieren cambiar el if cambienlo pero q funcione
         if(interaction.user == huggedUser){
             await interaction.reply({content: "No te puedes abrazar a ti mismo!", ephemeral: true});
         } else{
