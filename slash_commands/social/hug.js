@@ -13,14 +13,41 @@ module.exports = {
     ),
 
     async execute(interaction){
+        async function getImage(){
+            const query = "hug";
+            
+            const res = await fetch(`https://tenor.googleapis.com/v2/search?q=${query}&key=${tenorAPIKey}&limit=100`);
+            
+            if (!res.ok) {
+                throw new Error("No pudimos obtener la imagen, ¡avisa al staff!");
+            }
+
+            const data = await res.json();
+
+            const randomNumber = Math.floor(Math.random() * data.results.length);
+
+            const gifUrl = data.results[randomNumber].media_formats.gif.url;
+
+            return gifUrl;
+        };
+
         const { options } = interaction;
         const huggedUser = options.getUser("usuario");
+        const image = await getImage();
 
         const embed = new EmbedBuilder()
-        .setTitle("Abrazo")
-        .setDescription(`${interaction.user} ha abrazado a ${huggedUser}`)
+        .setTitle("ABRAZO")
+        .setDescription(`### ${interaction.user} ha abrazado a ${huggedUser}`)
+        .setColor("Red")
+        .setFooter({text: "Powered by Tenor"})
+        .setTimestamp()
+        .setImage(image);
 
-        await interaction.reply({embeds: [embed]});
+        if(interaction.user == huggedUser){
+            await interaction.reply({content: "No te puedes abrazar a ti mismo!", ephemeral: true});
+        } else{
+            await interaction.reply({embeds: [embed]});
+        }
     }
 
-}
+};
