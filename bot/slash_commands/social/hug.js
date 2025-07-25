@@ -13,7 +13,6 @@ module.exports = {
     ),
 
     async execute(interaction){
-        // no toquen esta función por dios
         async function getImage(){
             const query = "hug";
             
